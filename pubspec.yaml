@@ -1,0 +1,33 @@
+name: Shokan_Grade
+description: Shokan Grade Calculator
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.10.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/logo.png
+    - assets/images/shokan1.png
+
+# НОВЫЙ ПРАВИЛЬНЫЙ КЛЮЧ (обязательно!)
+flutter_launcher_icons:
+  android: true
+  ios: true
+
+  image_path: "assets/images/shokan1.png"
+
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/shokan1.png"
+
+  min_sdk_android: 21
