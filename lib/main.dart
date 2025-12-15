@@ -65,7 +65,6 @@ class AppStrings {
     this.languageSetting = "Язык",
     this.aboutApp = "О приложении",
     this.aboutTitle = "О приложении",
-    // ОБНОВЛЕННЫЙ ТЕКСТ
     this.aboutDescription = "Shokan Grade — кроссплатформенное мобильное приложение, предназначенное для студентов, обучающихся по кредитно-рейтинговой системе. Приложение обеспечивает точный расчёт итоговой оценки по дисциплине на основе текущей оценки, результатов рубежного контроля и экзаменационного балла.\n\nРазработка выполнена в учебных целях в рамках дисциплины «Программирование мобильных устройств» и демонстрирует практические навыки создания мобильных приложений для Android и iOS.\n\nФункциональное назначение приложения — предоставление студентам удобного инструмента для определения итогового рейтинга, который также может использоваться при расчёте академической успеваемости и определении права на получение стипендии.",
     this.developer = "👨‍💻 РАЗРАБОТЧИК:",
     this.developerInfo = "Karzhaubayev Sanzhar\nГруппа: ВТиПОК-221",
@@ -105,7 +104,6 @@ final kazakhStrings = AppStrings(
   languageSetting: "Тіл",
   aboutApp: "Қолданба туралы",
   aboutTitle: "Қолданба туралы",
-  // ОБНОВЛЕННЫЙ ТЕКСТ - ИСПРАВЛЕНО
   aboutDescription: "Shokan Grade – кредиттік жүйеде оқитын студенттерге арналған кросс-платформалы мобильді қосымша. Қосымша курс бойынша қорытынды бағасын ағымдағы бағасына, аралық бағалау нәтижелеріне және емтихан нәтижелеріне негіздеп дәл есептейді.\n\nБұл қосымша мобильді құрылғыларды бағдарламалау курсы аясында білім беру мақсатында жасалған және Android және iOS үшін мобильді қосымшалар жасаудағы практикалық дағдыларды көрсетеді.\n\nҚосымшаның мақсаты – студенттерге қорытынды бағасын анықтауға арналған ыңғайлы құралды ұсыну, оны академиялық көрсеткіштерді есептеу және стипендияға құқығын анықтау үшін де пайдалануға болады.",
   developer: "👨‍💻 ӘЗІРЛЕУШІ:",
   developerInfo: "Қаржаубаев Санжар\nТоп: ВТиПОК-221",
@@ -141,7 +139,6 @@ final englishStrings = AppStrings(
   languageSetting: "Language",
   aboutApp: "About App",
   aboutTitle: "About App",
-  // ОБНОВЛЕННЫЙ ТЕКСТ - ИСПРАВЛЕНО
   aboutDescription: "Shokan Grade is a cross-platform mobile app designed for students enrolled in a credit-based system. The app accurately calculates their final grade for a course based on their current grade, midterm assessment results, and exam scores.\n\nThis app was developed for educational purposes within the Mobile Device Programming course and demonstrates practical skills in creating mobile apps for Android and iOS.\n\nThe app's purpose is to provide students with a convenient tool for determining their final grade, which can also be used to calculate academic performance and determine scholarship eligibility.",
   developer: "👨‍💻 DEVELOPER:",
   developerInfo: "Karzhaubayev Sanzhar\nGroup: VTiPOK-221",
@@ -293,14 +290,14 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
   Color _getResultColor(double grade) {
     if (grade >= 90) return const Color(0xFF4CAF50);
-    if (grade >= 80) return const Color(0xFF2196F3);
+    if (grade >= 70) return const Color(0xFF2196F3);
     if (grade >= 50) return const Color(0xFFFFC107);
     return const Color(0xFFF44336);
   }
 
   String _getGradeDescription(double grade) {
     if (grade >= 90) return widget.strings.excellent;
-    if (grade >= 80) return widget.strings.good;
+    if (grade >= 70) return widget.strings.good;
     if (grade >= 50) return widget.strings.satisfactory;
     return widget.strings.unsatisfactory;
   }
@@ -491,62 +488,78 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
                     const SizedBox(height: 24),
 
-                    // Кнопка расчета
-                    SizedBox(
-                      width: double.infinity,
-                      height: 56,
-                      child: ElevatedButton(
-                        onPressed: _calculate,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: primaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                    // === ИСПРАВЛЕННАЯ ЧАСТЬ: КНОПКА И РЕЗУЛЬТАТ С ОДИНАКОВОЙ ДЛИНОЙ ===
+                    Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Кнопка расчета - длина подстраивается под текст
+                          Container(
+                            child: ElevatedButton(
+                              onPressed: _calculate,
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size(double.minPositive, 56),
+                                backgroundColor: primaryColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                                child: Text(
+                                  widget.strings.calculateButton,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                        child: Text(
-                          widget.strings.calculateButton,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+
+                          // Результат - ДЛИНА ТАКАЯ ЖЕ как у кнопки
+                          if (_resultText.isNotEmpty) ...[
+                            const SizedBox(height: 20),
+                            Container(
+                              // БЕЗ фиксированной ширины - длина берется от кнопки
+                              child: Card(
+                                color: _resultColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        widget.strings.result,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        _resultText,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.white,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
                       ),
                     ),
-
-                    // Результат
-                    if (_resultText.isNotEmpty) ...[
-                      const SizedBox(height: 20),
-                      Card(
-                        color: _resultColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            children: [
-                              Text(
-                                widget.strings.result,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                _resultText,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
                   ],
                 ),
               ),
