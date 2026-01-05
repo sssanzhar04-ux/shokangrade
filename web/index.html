@@ -6,27 +6,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
+    <!-- 🔥 ВАЖНО: версия билда (ломает кэш Flutter SW) -->
+    <meta name="flutter-build-version" content="2">
+
     <!-- SEO -->
     <title>Shokan Grade — расчёт итоговой оценки и стипендии</title>
-    <meta name="description" content="Shokan Grade — онлайн-сервис для расчёта итоговой оценки студентов и определения возможности сохранения стипендии." />
-    <meta name="keywords" content="Shokan Grade, итоговая оценка, GPA, стипендия, калькулятор оценок, студенты" />
+    <meta name="description" content="Shokan Grade — онлайн-сервис для расчёта итоговой оценки студентов и определения возможности сохранения стипендии.">
+    <meta name="keywords" content="Shokan Grade, итоговая оценка, GPA, стипендия, калькулятор оценок, студенты">
     <meta name="author" content="Shokan University">
 
-    <!-- Mobile -->
+    <!-- Mobile / PWA -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Shokan Grade">
 
     <!-- Icons -->
-    <link rel="apple-touch-icon" href="icons/Icon-192.png">
     <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
     <!-- Manifest -->
     <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
+
+<!-- 🔥 Принудительное удаление старых Service Workers -->
+<script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+</script>
+
+<!-- Flutter -->
 <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
