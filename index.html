@@ -6,42 +6,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
+    <!-- 🔥 ВАЖНО: версия билда (ломает кэш Flutter SW) -->
+    <meta name="flutter-build-version" content="2">
+
+    <!-- Yandex verification -->
+    <meta name="yandex-verification" content="92773210a6ed96ca" />
+
     <!-- SEO -->
-    <title>Shokan Grade — калькулятор итоговых оценок студентов</title>
-    <meta name="description" content="Shokan Grade — веб-приложение для расчёта итоговых оценок студентов по кредитно-рейтинговой системе обучения.">
-
-    <!-- Open Graph / Social preview -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Shokan Grade">
-    <meta property="og:title" content="Shokan Grade — калькулятор итоговых оценок">
-    <meta property="og:description" content="Shokan Grade — веб-приложение для расчёта итоговых оценок студентов по кредитно-рейтинговой системе обучения.">
-    <meta property="og:url" content="https://sssanzhar04-ux.github.io/shokangrade/">
-    <meta property="og:image" content="https://sssanzhar04-ux.github.io/shokangrade/og-image.png">
-    <meta property="og:image:alt" content="Shokan Grade — калькулятор итоговых оценок">
-
-    <!-- Twitter / Telegram -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Shokan Grade — калькулятор итоговых оценок">
-    <meta name="twitter:description" content="Онлайн-сервис для расчёта итоговых оценок студентов.">
-    <meta name="twitter:image" content="https://sssanzhar04-ux.github.io/shokangrade/og-image.png">
-
-    <!-- Viewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shokan Grade — расчёт итоговой оценки и стипендии</title>
+    <meta name="description" content="Shokan Grade — онлайн-сервис для расчёта итоговой оценки студентов и определения возможности сохранения стипендии.">
+    <meta name="keywords" content="Shokan Grade, итоговая оценка, GPA, стипендия, калькулятор оценок, студенты">
+    <meta name="author" content="Shokan University">
 
     <!-- Mobile / PWA -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Shokan Grade">
 
     <!-- Icons -->
-    <link rel="icon" href="favicon.ico">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
     <!-- Manifest -->
     <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
+
+<!-- 🔥 Принудительное удаление старых Service Workers -->
+<script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+</script>
+
+<!-- Flutter -->
 <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
