@@ -34,18 +34,27 @@
 
 <body>
 
+<!-- 🔑 SEO-контент (читается Google, помогает закрепиться в поиске) -->
+<h1>Shokan Grade — рассчитай итоговую оценку и проверь, сохраняешь ли стипендию</h1>
+
+<p>
+    Shokan Grade — это онлайн-сервис для студентов, который помогает рассчитать итоговую
+    оценку по дисциплинам и определить возможность сохранения стипендии.
+</p>
+
 <!-- 🔥 Принудительное удаление старых Service Workers -->
 <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(function (registrations) {
-        for (let registration of registrations) {
-          registration.unregister();
-        }
-      });
+        navigator.serviceWorker.getRegistrations().then(function (registrations) {
+            for (let registration of registrations) {
+                registration.unregister();
+            }
+        });
     }
 </script>
 
 <!-- Flutter -->
 <script src="flutter_bootstrap.js" async></script>
+
 </body>
 </html>
