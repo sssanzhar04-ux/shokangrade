@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <base href="/shokangrade/">
+    <base href="$FLUTTER_BASE_HREF">
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
-    <!-- 🔥 ВАЖНО: версия билда (ломает кэш Flutter SW) -->
+    <!-- Flutter build -->
     <meta name="flutter-build-version" content="2">
-
-    <!-- Yandex verification -->
-    <meta name="yandex-verification" content="92773210a6ed96ca" />
 
     <!-- SEO -->
     <title>Shokan Grade — расчёт итоговой оценки и стипендии</title>
-    <meta name="description" content="Shokan Grade — онлайн-сервис для расчёта итоговой оценки студентов и определения возможности сохранения стипендии.">
-    <meta name="keywords" content="Shokan Grade, итоговая оценка, GPA, стипендия, калькулятор оценок, студенты">
-    <meta name="author" content="Shokan University">
+    <meta name="description"
+          content="Shokan Grade — онлайн-сервис для расчёта итоговой оценки студентов и определения возможности сохранения стипендии.">
+    <meta name="author" content="Karzhaubayev Sanzhar">
 
     <!-- Mobile / PWA -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,28 +30,7 @@
 </head>
 
 <body>
-
-<!-- 🔑 SEO-контент (читается Google, помогает закрепиться в поиске) -->
-<h1>Shokan Grade — рассчитай итоговую оценку и проверь, сохраняешь ли стипендию</h1>
-
-<p>
-    Shokan Grade — это онлайн-сервис для студентов, который помогает рассчитать итоговую
-    оценку по дисциплинам и определить возможность сохранения стипендии.
-</p>
-
-<!-- 🔥 Принудительное удаление старых Service Workers -->
-<script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(function (registrations) {
-            for (let registration of registrations) {
-                registration.unregister();
-            }
-        });
-    }
-</script>
-
 <!-- Flutter -->
 <script src="flutter_bootstrap.js" async></script>
-
 </body>
 </html>
